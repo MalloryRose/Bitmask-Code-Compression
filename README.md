@@ -1,6 +1,6 @@
 # Binary Code Compression and Decompression
 ## Overview
-This project implements a binary code compression and decompression system in Python, designed to efficiently compress 32-bit binary patterns into variable-length encoded formats and decompress them back to their original form. Developed as part of a university assignment, it demonstrates proficiency in algorithmic design, bit manipulation, and file I/O in Python.
+This project implements a binary code compression and decompression system in Python, designed to efficiently compress 32-bit binary patterns into variable-length encoded formats and decompress them back to their original form. Some concepts used include algorithmic design, bit manipulation, and file I/O in Python.
 
 The compression algorithm uses a dictionary-based approach with multiple encoding formats (direct matching, bitmask, mismatches, and run-length encoding) to achieve space efficiency, while the decompression logic accurately reconstructs the original binaries from the compressed data.
 
