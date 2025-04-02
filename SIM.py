@@ -253,6 +253,7 @@ class CodeCompression:
             if self.binary_code[i][:3] in ['111']:
                 continue
             current = self.original_binary[i]
+            best_pattern = None
             for dict_idx in range(16):
                 if not self.dictionary[dict_idx]:
                     continue
@@ -270,8 +271,13 @@ class CodeCompression:
                             if bitmask[j] == '1':
                                 modified[start_pos + j] = '1' if modified[start_pos + j] == '0' else '0'
                         if ''.join(modified) == current:
-                            self.binary_code[i] = f'010{start_pos:05b}{"".join(bitmask)}{dict_idx:04b}'
-                            break
+                            pattern = f'010{start_pos:05b}{"".join(bitmask)}{dict_idx:04b}'
+                            # Update best_pattern only if it's None or this has a lower index/start_pos
+                            if best_pattern is None or (dict_idx < int(best_pattern[15:], 2)) or \
+                            (dict_idx == int(best_pattern[15:], 2) and start_pos < int(best_pattern[3:8], 2)):
+                                best_pattern = pattern
+            if best_pattern:
+                self.binary_code[i] = best_pattern
 
     def bit_mismatch1(self):
         for i in range(len(self.binary_code)):
